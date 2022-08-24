@@ -20,19 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//  Route::get('/categories',[CategoryController::class,'index']);
-//  Route::get('/categories/create',[CategoryController::class,'create'])->middleware('auth');
-//  Route::post('/categories',[CategoryController::class,'store'])->middleware('auth');
-// Route::get('/categories/{id}/edit',[CategoryController::class,'edit'])->middleware('auth');
-// Route::put('/categories/{id}',[CategoryController::class,'update'])->middleware('auth');
-// Route::delete('/categories/{id}',[CategoryController::class,'destroy'])->middleware('auth');
-// Route::resource('/categories',CategoryController::class)->except(['show'])->middleware(['auth']);
-//  Route::post('/categories/store',[CategoryController::class,'store']);
-Route::get('/categories/list',[CategoryController::class,'list']);
-Route::get('/tasks/list',[TaskController::class,'list']);
+Route::get('/categories/list',[CategoryController::class,'list'])->middleware(['auth']);
+Route::get('/tasks/list',[TaskController::class,'list'])->middleware(['auth']);
 Route::get('/dashboard',[DashboardController::class,'index'])->middleware(['auth'])->name('dashboard');;
-Route::resource('categories', CategoryController::class);
-Route::resource('tasks', TaskController::class);
+Route::resource('categories', CategoryController::class)->middleware(['auth']);
+Route::resource('tasks', TaskController::class)->middleware(['auth']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
